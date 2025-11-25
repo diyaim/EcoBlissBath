@@ -1,19 +1,12 @@
-import { defineConfig } from "cypress";
+const { defineConfig } = require("cypress");
 
-export default defineConfig({
+module.exports = defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      on(
-        "before:browser:launch",
-        (browser: any, launchOptions: any) => {
-          if (browser.family === "chromium") {
-            launchOptions.args.push("--disable-password-manager");
-            launchOptions.args.push("--disable-save-password-bubble");
-            launchOptions.args.push("--disable-features=PasswordManager");
-          }
-          return launchOptions;
-        }
-      );
-    },
+    setupNodeEvents(on, config) {},
   },
+  reporter: "mocha-junit-reporter",
+  reporterOptions: {
+    mochaFile: "reports/junit/test-results-[hash].xml",
+    toConsole: false
+  }
 });

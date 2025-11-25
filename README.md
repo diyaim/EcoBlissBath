@@ -1,27 +1,62 @@
-# EcoBlissBath
+# Eco Bliss Bath – Tests Cypress
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+Ce projet contient l’ensemble des **tests automatisés Cypress** réalisés pour l’application web **Eco Bliss Bath**.
 
-## Development server
+Les tests couvrent :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Tests API  
+- Tests fonctionnels (Connexion & Panier)  
+- Smoke tests  
+- Test de sécurité XSS  
 
-## Code scaffolding
+Ce README explique comment **installer**, **lancer les tests** et **générer les rapports**.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 1. Prérequis
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Avant de commencer :
 
-## Running unit tests
+- Node.js **≥ 16**
+- npm **≥ 8**
+- Backend Eco Bliss Bath lancé (port **8081**)
+- Frontend Eco Bliss Bath lancé (port **4200**)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 2. Installation du projet
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Dans un terminal, à la racine du projet :
 
-## Further help
+```bash
+npm install
+```
+Cela installe Cypress et toutes les dépendances nécessaires.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 3. Lancer Cypress en mode interface
+
+```bash
+npm run cypress:open
+```
+Cela ouvre l’interface graphique de Cypress, veuillez ensuite suivre les étapes suivantes :
+- Cliquer sur E2E Testing
+- Cliquer sur le navigateur de votre choix (Chrome/Edge/Electron/Firefox)
+- Cliquer sur Start E2E Testing
+- Cliquer sur le test de votre choix sur la nouvelle page des specifications
+
+## 4. Lancer tous les tests en mode headless
+
+```bash
+npm run cypress:run
+```
+Ce mode exécute tous les tests dans le terminal.
+
+## 5. Générer un rapport de tests
+
+```bash
+npm run cypress:report
+```
+Les résultats apparaîtront dans 
+```bash
+cypress/reports/junit
+```
