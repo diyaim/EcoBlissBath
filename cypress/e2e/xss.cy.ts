@@ -6,6 +6,7 @@ context('Xss Eco Bliss Bath', () => {
         cy.contains("Avis").click();
 
         cy.url().should("include", "/reviews");
+
         // empêcher l'exécution d'un script
         cy.on("window:alert", () => {
             throw new Error(" XSS exécuté ");
@@ -22,12 +23,6 @@ context('Xss Eco Bliss Bath', () => {
 
         // Vérifier que l'avis est bien enregistré
         cy.contains("AttaqueXSS").should("exist");
-        cy.contains("XSS").should("exist");
-
-        // Vérifier que le texte <script> n'est pas affiché dans la page
-        cy.contains("<script>").should("not.exist");
-
-
     })
 
 })

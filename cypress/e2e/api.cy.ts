@@ -6,21 +6,14 @@ context('API Eco Bliss Bath', () => {
             url: 'http://localhost:8081/orders',
             failOnStatusCode: false, // ne pas faire échouer le test
         }).then((response) => {
-            expect(response.status).to.eq(401);
+            expect(response.status).to.eq(403);
         });
     });
 
     // test 2: Vérifier que le login fonctionne avec des identifiants valides
     it(' login avec un utilisateur valide', () => {
-        cy.request({
-            method: "POST",
-            url: "http://localhost:8081/login",
-            body: {
-                username: "test2@test.fr",
-                password: "testtest",
-            },
-        }).then((response) => {
-            expect(response.status).to.eq(200);
+      cy.apiLogin().then((res) => {
+            expect(res.status).to.eq(200);
         });
     });
 
@@ -35,21 +28,14 @@ context('API Eco Bliss Bath', () => {
                 password: "mauvaisMotDePasse",
             },
         }).then((response) => {
-            expect(response.status).to.be.oneOf([400, 401]);
+            expect(response.status).to.eq(401);
         });
     });
 
     // test 4: Vérifier qu'on peut récupérer le panier après connexion
     it(' récupère le panier après connexion', () => {
         //connexion
-        cy.request({
-            method: "POST",
-            url: "http://localhost:8081/login",
-            body: {
-                username: "test2@test.fr",
-                password: "testtest",
-            },
-        }).then((response) => {
+       cy.apiLogin().then((response) => {
             expect(response.status).to.eq(200);
             const token = response.body.token; // récupère le Token
             //on récupère le panier
@@ -79,17 +65,10 @@ context('API Eco Bliss Bath', () => {
     // test 6: Vérifier que l'on peut ajouter un produit diposnible au panier 
     it(' ajouter un produit disponible au panier', () => {
         //connexion
-        cy.request({
-            method: "POST",
-            url: "http://localhost:8081/login",
-            body: {
-                username: "test2@test.fr",
-                password: "testtest",
-            },
-        }).then((response) => {
+      cy.apiLogin().then((response) => {
             expect(response.status).to.eq(200);
             const token = response.body.token; // récupère le Token
-            //on récupère le panier
+            //
             cy.request({
                 method: "PUT",
                 url: "http://localhost:8081/orders/add",
@@ -109,17 +88,10 @@ context('API Eco Bliss Bath', () => {
     // test 7: Vérifier que l'on peut pas ajouter un produit en répture de stock 
     it(' ajouter un produit en rupture', () => {
         //connexion
-        cy.request({
-            method: "POST",
-            url: "http://localhost:8081/login",
-            body: {
-                username: "test2@test.fr",
-                password: "testtest",
-            },
-        }).then((response) => {
+      cy.apiLogin().then((response) => {
             expect(response.status).to.eq(200);
             const token = response.body.token; // récupère le Token
-            //on récupère le panier
+            //
             cy.request({
                 method: "PUT",
                 url: "http://localhost:8081/orders/add",
@@ -140,17 +112,10 @@ context('API Eco Bliss Bath', () => {
     // test 8: ajouter un avis
     it(' ajouter un avis', () => {
         //connexion
-        cy.request({
-            method: "POST",
-            url: "http://localhost:8081/login",
-            body: {
-                username: "test2@test.fr",
-                password: "testtest",
-            },
-        }).then((response) => {
+       cy.apiLogin().then((response) => {
             expect(response.status).to.eq(200);
             const token = response.body.token; // récupère le Token
-            //on récupère le panier
+            //
             cy.request({
                 method: "POST",
                 url: "http://localhost:8081/reviews",

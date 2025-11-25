@@ -123,7 +123,7 @@ context(' Panier Eco Bliss Bath', () => {
     cy.contains(/-?\d+\s*en stock/).should("exist");
   })
 
-  // Test 6: vérifier que le produit s'ajoute via l'API it('Ajoutez un élément au panier (clic bouton ajouter au panier, vérification du contenu du panier via l’API)', () => {
+  // Test 6: vérifier que le produit s'ajoute via l'API 
   it('vérifier que le produit sajoute via lAPI', () => {
     cy.loginAPI()
     cy.wait(1000);

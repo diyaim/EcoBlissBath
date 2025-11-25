@@ -14,8 +14,9 @@ declare global {
       addToCart(): Chainable<void>;
       removeToCart(): Chainable<void>;
       setQuantity(quantity: number): Chainable<void>;
-      getCart(): Chainable<any[]>;
       loginAPI(): Chainable<void>;
+      apiLogin(): Chainable<Cypress.Response<any>>;
+      apiRequest(): Chainable<void>;
     }
   }
 }
@@ -31,9 +32,9 @@ Cypress.Commands.add('login', () => {
 
   // Clic sur le bouton
   cy.contains('button', 'Se connecter').click();
- 
-// Vérifier que la connexion est ok côté UI
-cy.contains('Déconnexion');
+
+  // Vérifier que la connexion est ok côté UI
+  cy.contains('Déconnexion');
 });
 
 // Methode : Aller au panier 
@@ -129,4 +130,38 @@ Cypress.Commands.add("loginAPI", () => {
   });
 
 })
+
+//API 
+// Cypress.Commands.add('apiLogin', () => {
+//   return cy.request({
+//     method: "POST",
+//     url: "http://localhost:8081/login",
+//     body: {
+//       username: "test2@test.fr",
+//       password: "testtest"
+//     }
+//   }).then((res) => {
+//     expect(res.status).to.eq(200);
+//     Cypress.env("token", res.body.token);
+//     return res.body.token;
+//   });
+// });
+
+
+Cypress.Commands.add('apiLogin', () => {
+  return cy.request({
+    method: "POST",
+    url: "http://localhost:8081/login",
+    body: {
+      username: "test2@test.fr",
+      password: "testtest"
+    },
+    failOnStatusCode: false
+  }).then((res: any) => {
+    return res; 
+  });
+});
+
+
+
 export { };
