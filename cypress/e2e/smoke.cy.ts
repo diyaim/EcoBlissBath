@@ -7,7 +7,6 @@ context('Smoke Eco Bliss Bath', () => {
         cy.contains('Accueil').should('exist');
         cy.contains('Produits').should('exist');
         cy.contains('Avis').should('exist');
-        cy.contains('Avis').should('exist');
         cy.contains('Connexion').should('exist');
         cy.contains('Inscription').should('exist');
 
